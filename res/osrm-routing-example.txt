@@ -1,0 +1,177 @@
+Las Vegas
+############
+{
+    "code":"Ok",
+    "routes":[{
+        "legs":[{
+            "steps":[
+                {
+                    "intersections":[{"out":0,"entry":[true],"bearings":[174],"location":[13.38882,52.517034]},{"out":2,"in":0,"entry":[false,true,true,false],"bearings":[0,90,180,270],"location":[13.388849,52.516865]},{"out":2,"in":0,"entry":[false,true,true,true],"bearings":[0,90,180,270],"location":[13.389037,52.515644]},{"out":2,"in":0,"entry":[false,true,true,true],"bearings":[0,90,180,270],"location":[13.389179,52.514759]},{"out":2,"in":0,"entry":[true,true,true,true],"bearings":[0,90,180,270],"location":[13.389324,52.513877]},{"out":2,"in":0,"entry":[false,true,true,true],"bearings":[0,90,180,270],"location":[13.389463,52.512996]},{"out":2,"in":0,"entry":[false,false,true,true],"bearings":[0,90,180,270],"location":[13.389601,52.512148]},{"out":2,"in":0,"entry":[false,true,true,false],"bearings":[0,90,180,270],"location":[13.389614,52.512075]},{"out":2,"in":0,"entry":[false,true,true,true],"bearings":[0,90,180,270],"location":[13.389755,52.511226]},{"out":1,"in":3,"entry":[true,true,true,true],"bearings":[90,180,270,345],"location":[13.389896,52.510356]},{"out":2,"in":0,"entry":[false,true,true,true],"bearings":[0,90,180,270],"location":[13.390049,52.509452]},{"out":2,"in":0,"entry":[false,true,true,true],"bearings":[0,90,180,270],"location":[13.390189,52.508593]},{"out":2,"in":0,"entry":[false,true,true,true],"bearings":[0,90,180,270],"location":[13.390335,52.507689]}],
+                    "driving_side":"right",
+                    "geometry":"mfp_Ic_vpAB?ZETCD?BAD?~AMVC`AID?NCLAD?BARHB?VCXCj@SF?@AD?PCRCB?@AXC@?^HNCl@GB?DAPMNC@?jCU@?NALABA~BSD?PCLANCFAdBO@?TCD?LCPL@?l@GjAM@?D?BARQTABA@?HAPAB?\\DPA`@E@?JOF?@ANALAB?fCWD?JARCB?zAMh@GD?NCLH@?DATANANO@?l@GNAXCBAF?PC",
+                    "maneuver":{"bearing_after":174,"bearing_before":0,"location":[13.38882,52.517034],"type":"depart"},
+                    "name":"Friedrichstraße",
+                    "mode":"driving",
+                    "weight":122.7,
+                    "duration":121.1,
+                    "distance":1162.5},
+                {
+                    "intersections":[{"out":3,"in":0,"entry":[false,true,true,true],"bearings":[0,90,180,270],"location":[13.390496,52.506711]}],
+                    "driving_side":"right",
+                    "geometry":"}en_IsivpA@b@?JBl@Bz@@j@?J@HLdFFnB?LFvBBnABx@@JFh@",
+                    "maneuver":{"bearing_after":262,"bearing_before":172,"location":[13.390496,52.506711],"modifier":"right","type":"turn"},
+                    "name":"Kochstraße",
+                    "mode":"driving",
+                    "weight":34.7,
+                    "duration":34.7,
+                    "distance":303.4},
+                {
+                    "intersections":[{"out":1,"in":0,"entry":[false,true,true],"bearings":[75,165,345],"location":[13.386058,52.506404]},{"lanes":[{"valid":true,"indications":["straight"]},{"valid":false,"indications":["right"]}],"out":0,"in":2,"entry":[true,true,false],"bearings":[165,255,345],"location":[13.386618,52.505338]},{"out":1,"in":2,"entry":[true,true,false],"bearings":[75,165,345],"location":[13.387183,52.504271]},{"out":1,"in":3,"entry":[true,true,true,false],"bearings":[75,165,240,345],"location":[13.387868,52.502938]},{"out":1,"in":2,"entry":[true,true,false],"bearings":[90,165,345],"location":[13.388181,52.50234]},{"out":2,"in":0,"entry":[false,false,true],"bearings":[0,90,180],"location":[13.388704,52.500715]},{"out":2,"in":0,"entry":[false,true,true,true],"bearings":[0,105,180,300],"location":[13.388742,52.499423]},{"out":2,"in":0,"entry":[false,true,true,false],"bearings":[0,60,180,300],"location":[13.388734,52.499332]},{"out":2,"in":0,"entry":[false,false,true,true],"bearings":[0,105,165,285],"location":[13.388789,52.498114]}],
+                    "driving_side":"right",
+                    "geometry":"_dn_I{mupAREJEb@SJEn@c@FCh@UPGNCNEDALEJE`@QFCDEDEBCDCj@ULGJEFCVIJEHCDCp@WTMj@UPGPINGFC^QDCVKVKDCRGdAe@t@[p@YRIHCRG^GBAXC`@EJ?PA??j@E\\CLANA\\C|@G`@Dj@BF?T@P@F?J?D?r@?dBEXAH?ZCPEFAx@ONC",
+                    "maneuver":{"bearing_after":163,"bearing_before":254,"location":[13.386058,52.506404],"modifier":"left","type":"turn"},
+                    "name":"Wilhelmstraße",
+                    "mode":"driving",
+                    "weight":110.5,
+                    "duration":110.5,
+                    "distance":1007},
+                {
+                    "intersections":[{"out":1,"in":3,"entry":[true,true,false,false],"bearings":[105,165,285,345],"location":[13.388931,52.497613]}],
+                    "driving_side":"right",
+                    "maneuver":{"bearing_after":168,"bearing_before":170,"location":[13.388931,52.497613],"modifier":"straight","type":"new name"},"destinations":"A 100, B 96: Tempelhof","geometry":"aml_Iy_vpAVGB?ZIFAnCg@r@OJAFATC",
+                    "ref":"B 96",
+                    "name":"Mehringdamm",
+                    "mode":"driving",
+                    "weight":22.3,
+                    "duration":22.3,
+                    "distance":171.3},
+                {
+                    "intersections":[{"out":3,"in":0,"entry":[false,false,true,true],"bearings":[0,105,180,285],"location":[13.389349,52.496095]},{"out":2,"in":1,"entry":[true,false,true],"bearings":[30,105,285],"location":[13.386973,52.496402]}],
+                    "driving_side":"right",
+                    "geometry":"scl_ImbvpACXCP?FAREj@@XABKzAG~@AFQ`CALATEb@Gf@MdB",
+                    "maneuver":{"bearing_after":285,"bearing_before":171,"location":[13.389349,52.496095],"modifier":"right","type":"turn"},
+                    "name":"Obentrautstraße",
+                    "mode":"driving",
+                    "weight":33.3,
+                    "duration":33.3,
+                    "distance":228},
+                {
+                    "intersections":[{"out":0,"in":1,"entry":[true,false,true],"bearings":[15,105,285],"location":[13.386079,52.496538]}],
+                    "driving_side":"right",
+                    "geometry":"kfl_I_nupAEAICAAA?WGME",
+                    "maneuver":{"bearing_after":12,"bearing_before":281,"location":[13.386079,52.496538],"modifier":"right","type":"turn"},
+                    "name":"",
+                    "mode":"driving",
+                    "weight":15.7,
+                    "duration":7.9,
+                    "distance":32.9},
+                {
+                    "intersections":[{"in":0,"entry":[true],"bearings":[194],"location":[13.386189,52.496826]}],
+                    "driving_side":"right",
+                    "geometry":"ehl_IunupA",
+                    "maneuver":{"bearing_after":0,"bearing_before":14,"location":[13.386189,52.496826],"modifier":"left","type":"arrive"},
+                    "name":"",
+                    "mode":"driving",
+                    "weight":0,
+                    "duration":0,
+                    "distance":0}
+            ],
+            "weight":339.2,
+            "summary":"Friedrichstraße, Wilhelmstraße",
+            "duration":329.8,"distance":2905.1
+        }],
+        "weight_name":"routability","geometry":"mfp_Ic_vpAn_AoI|@vZd]sNvSi@lLsBwAlSy@U","weight":339.2,"duration":329.8,"distance":2905.1
+    }],
+    "waypoints":[
+        {"hint":"ZgEKgKXunYUXAAAABQAAAAAAAAAdAAAAuFtKQYXNK0AAAAAAIMuBQQsAAAADAAAAAAAAAA8AAACLGwEAFEzMAKpYIQM8TMwArVghAwAA3woAAAAA","location":[13.38882,52.517034],"name":"Friedrichstraße","distance":2.73531597},
+        {"hint":"xykSjckpEo0nAAAAAAAAAHYAAAAAAAAAPY4AQQAAAADLBMdBAAAAABMAAAAAAAAAPAAAAAAAAACLGwEAzUHMALoJIQP_QMwA-wkhAwoA7wAAAAAA","location":[13.386189,52.496826],"name":"","distance":15.75576528}
+    ]
+}
+
+Karlsruhe
+############
+{
+    "code":"Ok",
+    "routes":[{
+        "legs":[{
+            "steps":[
+                {
+                    "intersections":[{"out":0,"entry":[true],"bearings":[135],"location":[8.375148,48.994339]}],
+                    "driving_side":"right",
+                    "maneuver":{"bearing_after":135,"bearing_before":0,"location":[8.375148,48.994339],"modifier":"right","type":"depart"},
+                    "geometry":"se`jHuwbr@z@yAz@_B",
+                    "ref":"K 9657",
+                    "name":"Südtangente",
+                    "mode":"driving",
+                    "weight":5.4,
+                    "duration":5.4,
+                    "distance":95.4
+                },
+                {
+                    "intersections":[{"out":1,"in":2,"entry":[true,true,false],"bearings":[135,150,315],"location":[8.376081,48.993741]}],
+                    "driving_side":"right",
+                    "geometry":"{a`jHo}br@\\YPWRUVSVMXK`@QLGNMNOHMHMPe@h@yAPc@LYNUJMHGHCHED?J?LBLDNHDBHFHD",
+                    "maneuver":{"bearing_after":146,"bearing_before":132,"location":[8.376081,48.993741],"modifier":"slight right","type":"off ramp"},
+                    "destinations":"Ettlingen, Oberreut, Bulach, Südwest",
+                    "name":"",
+                    "mode":"driving",
+                    "weight":15.3,
+                    "duration":15.3,
+                    "distance":331.9
+                },
+                {
+                    "intersections":[{"out":2,"in":0,"entry":[false,false,true],"bearings":[15,45,225],"location":[8.378124,48.991336]},{"out":1,"in":0,"entry":[false,true,true],"bearings":[45,225,240],"location":[8.377121,48.990556]},{"out":2,"in":1,"entry":[false,false,true],"bearings":[15,45,210],"location":[8.37607,48.989695]},{"out":2,"in":1,"entry":[false,false,true],"bearings":[0,15,195],"location":[8.373103,48.986124]}],
+                    "driving_side":"right",
+                    "maneuver":{"bearing_after":219,"bearing_before":201,"location":[8.378124,48.991336],"modifier":"slight left","type":"merge"},
+                    "geometry":"{r_jHgjcr@`ApAX^~@tAPRbAtA~@hAT\\pC~C`AbAfA`A~@v@~@t@lAx@lAr@fAj@jAb@f@PrA\\z@T`ALbALd@BRB",
+                    "ref":"L 605",
+                    "name":"",
+                    "mode":"driving",
+                    "weight":58.1,
+                    "duration":58.1,
+                    "distance":905.3
+                },
+                {
+                    "intersections":[{"lanes":[{"valid":false,"indications":["none"]},{"valid":false,"indications":["none"]},{"valid":true,"indications":["slight right"]}],"out":2,"in":0,"entry":[false,true,true],"bearings":[0,180,195],"location":[8.372572,48.984239]}],
+                    "driving_side":"right",
+                    "geometry":"of~iHqgbr@h@Xz@Nf@Fx@Df@@f@AhAGDAHAH?",
+                    "maneuver":{"bearing_after":201,"bearing_before":185,"location":[8.372572,48.984239],"modifier":"slight right","type":"off ramp"},
+                    "destinations":"Karlsruhe-Weiherfeld, Karlsruhe-Oberreut, Großoberfeld, Badenia-Platz",
+                    "name":"",
+                    "mode":"driving",
+                    "weight":19,
+                    "duration":19,
+                    "distance":213.7213
+                },
+                {
+                    "intersections":[{"out":3,"in":0,"entry":[false,true,true,true],"bearings":[0,75,165,270],"location":[8.372354,48.982343]},{"out":2,"in":1,"entry":[true,false,true],"bearings":[0,90,270],"location":[8.371798,48.982346]},{"out":2,"in":0,"entry":[false,true,true],"bearings":[90,180,270],"location":[8.370974,48.982352]}],
+                    "driving_side":"right",
+                    "geometry":"sz}iHefbr@?R?F?PA~@?\\?bB?F?Z?\\?F?`A?b@?~D?H?B",
+                    "maneuver":{"bearing_after":270,"bearing_before":171,"location":[8.372354,48.982343],"modifier":"right","type":"turn"},
+                    "name":"Wilhelm-Leuschner-Straße",
+                    "mode":"driving",
+                    "weight":27.1,
+                    "duration":27.1,
+                    "distance":227.7
+                },
+                {
+                    "intersections":[{"in":0,"entry":[true],"bearings":[90],"location":[8.369244,48.982349]}],
+                    "driving_side":"right",
+                    "geometry":"uz}iHwrar@",
+                    "maneuver":{"bearing_after":0,"bearing_before":270,"location":[8.369244,48.982349],"type":"arrive"},
+                    "name":"Wilhelm-Leuschner-Straße",
+                    "mode":"driving",
+                    "weight":0,
+                    "duration":0,
+                    "distance":0
+                }
+            ],
+            "weight":124.9,"summary":"L 605, Wilhelm-Leuschner-Straße","duration":124.9,"distance":1774
+        }],
+        "weight_name":"routability","geometry":"se`jHuwbr@vByDfF{DtBaFvAUdQxSbJ|GnG~B`JbBtG@AlR","weight":124.9,"duration":124.9,"distance":1774
+    }],
+    "waypoints":[
+        {"hint":"rt-4gv___38BAAAAHAAAAG4AAAAbAAAAocgIQGVXO0KAYkRDDxBCQgEAAAAcAAAAbgAAABsAAACLGwEAbMt_ACOY6wI6y38AA5jrAgwAfwgAAAAA","location":[8.375148,48.994339],"name":"Südtangente","distance":5.105193003},
+        {"hint":"QYIGgCY0V4QCAAAAAgAAAAoAAAB6AAAA-AqyP_gKsj_tz8tAXj2uQgIAAAACAAAACgAAAHoAAACLGwEAXLR_AE1p6wJctH8APWnrAgIArwUAAAAA","location":[8.369244,48.982349],"name":"Wilhelm-Leuschner-Straße","distance":1.779348058}
+    ]
+}

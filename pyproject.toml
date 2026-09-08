@@ -1,0 +1,91 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "route_description_generation"
+version = "0.1.0"
+description = "Natural language routing generation for nuPlan scenarios"
+readme = "README.md"
+requires-python = ">=3.9.12"
+license = { text = "MIT" }
+
+authors = [
+    { name = "Marlon Steiner", email = "marlon.steiner@kit.edu" }
+]
+
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+dependencies = [
+    "click",
+    "interplan",
+    "numpy",
+    "nuplan-devkit",
+    "pyyaml",
+    "pyproj",
+    "requests",
+    "tqdm",
+    "urllib3",
+]
+
+[project.scripts]
+rdg = "route_description_generation.cli.main:cli"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["route_description_generation*"]
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.uv.sources]
+nuplan-devkit = { git = "https://github.com/marlon31415/nuplan-devkit" }
+nucontrol = { git = "https://github.com/marlon31415/nucontrol" }
+interplan = { git = "https://github.com/ll-nick/interPlan" }
+
+[dependency-groups]
+dev = [
+    "nucontrol",
+    "pytest>=8.4.2",
+    "ruff>=0.15.1",
+]
+
+[tool.uv]
+override-dependencies = [
+    # Flowdrive and nuplan-devkit have conflicting dependencies, so we need to override them here
+    "pytorch-lightning==2.0.1",
+    "torch==2.8.0",
+    "torchvision==0.23.0",
+]
+prerelease = "allow"
+
+[tool.ruff]
+target-version = "py39"
+line-length = 100
+
+[tool.ruff.lint]
+# E/F are ruff's defaults; I keeps imports ordered, B and SIM catch real bugs and
+# needless complexity. Annotation-modernisation rules (UP/FA) are deliberately off: the
+# package supports Python 3.9, where typing.Dict/List remain the compatible spelling.
+select = ["E", "F", "I", "B", "SIM"]
+ignore = [
+    "E501",    # line length is enforced by the formatter, not the linter
+    "SIM105",  # contextlib.suppress is not clearer than try/except/pass here
+]
+
+[tool.ruff.lint.per-file-ignores]
+# Tests reach into private helpers on purpose to pin down internal behaviour.
+"tests/*" = ["SIM117"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+# Integration tests need nuPlan data, a built dataset and running OSRM servers, and take minutes.
+# They are opt-in so that a bare `pytest` stays fast: run them with `pytest -m integration`.
+addopts = "-m 'not integration'"
+markers = [
+    "integration: requires nuPlan data and a pre-built dataset (deselected by default)",
+]
