@@ -8,8 +8,10 @@ lets consumers read a single scenario in O(1) without parsing the whole JSONL.
 import atexit
 import json
 import sqlite3
+import time
 from pathlib import Path
 from typing import Any, Dict, Iterator, List, Optional, Set, Tuple, Union
+from urllib.parse import quote
 
 from tqdm import tqdm
 
@@ -17,6 +19,14 @@ from tqdm import tqdm
 # ``persistent_workers=True`` call load_by_token once per sample, so reopening each time would
 # dominate the read cost.
 _HANDLE_CACHE: Dict[Tuple[str, str], Dict[str, Any]] = {}
+
+#: How many times a read is retried after a transient filesystem error before giving up. These
+#: datasets are routinely read from network storage by a hundred-plus DataLoader workers at once,
+#: where a single failed RPC surfaces as ``sqlite3.OperationalError: disk I/O error`` and kills the
+#: worker -- and with it a training run that may be dozens of epochs in. A blip is worth a retry.
+_IO_RETRY_ATTEMPTS = 3
+#: Seconds to wait before the first retry; doubled on each subsequent one.
+_IO_RETRY_BACKOFF_S = 0.25
 
 
 def _close_cached_handles() -> None:
@@ -36,10 +46,30 @@ def _close_cached_handles() -> None:
 atexit.register(_close_cached_handles)
 
 
+def _immutable_uri(sqlite_index_file: str) -> str:
+    """SQLite URI opening the index read-only with locking disabled.
+
+    ``immutable=1`` promises SQLite the file will not change while it is open, which lets it skip
+    every lock and every change-counter check. On a POSIX filesystem that only saves a little; on
+    NFS mounted with ``local_lock=none`` each of those checks is a network round-trip, and a
+    ``SELECT`` by token costs ~2 ms instead of ~7 us. It also removes the lock traffic that makes
+    the read fail under load in the first place.
+
+    The promise is real: regenerating an index while a reader process holds it open gives that
+    reader stale or corrupt pages. Builders (``dataset_builder``, ``cli.modify_dataset``) open
+    their own read-write connections and are unaffected; only start a rebuild once readers are done.
+    """
+    return f"file:{quote(str(Path(sqlite_index_file).resolve()))}?immutable=1"
+
+
 def _cached_handles(sqlite_index_file: str, json_data_file: str) -> Dict[str, Any]:
     key = (sqlite_index_file, json_data_file)
     if key not in _HANDLE_CACHE:
-        connection = sqlite3.connect(sqlite_index_file)
+        # An immutable connection to a missing file opens happily and only fails later with
+        # "no such table: routes", which sends the reader looking for the wrong problem.
+        if not Path(sqlite_index_file).exists():
+            raise FileNotFoundError(f"routing index not found: {sqlite_index_file}")
+        connection = sqlite3.connect(_immutable_uri(sqlite_index_file), uri=True)
         _HANDLE_CACHE[key] = {
             "conn": connection,
             "cur": connection.cursor(),
@@ -49,10 +79,26 @@ def _cached_handles(sqlite_index_file: str, json_data_file: str) -> Dict[str, An
     return _HANDLE_CACHE[key]
 
 
-def load_by_token(
+def _drop_cached_handles(key: Tuple[str, str]) -> None:
+    """Forget one cache entry so the next call reopens it, closing what can still be closed."""
+    handles = _HANDLE_CACHE.pop(key, None)
+    if handles is None:
+        return
+    for name in ("file", "conn"):
+        handle = handles.get(name)
+        if handle is None:
+            continue
+        try:
+            handle.close()
+        except Exception:
+            # The handle is being discarded either way; a failure to close it changes nothing.
+            pass
+
+
+def _read_by_token(
     sqlite_index_file: str, json_data_file: str, token: str
 ) -> Optional[Dict[str, Any]]:
-    """Return the dataset row for ``token``, or ``None`` when it is not in the index."""
+    """One attempt at :func:`load_by_token`, without the retry."""
     handles = _cached_handles(sqlite_index_file, json_data_file)
     handles["cur"].execute("SELECT offset FROM routes WHERE token = ?", (token,))
     row = handles["cur"].fetchone()
@@ -61,6 +107,32 @@ def load_by_token(
 
     handles["file"].seek(row[0])
     return json.loads(handles["file"].readline())
+
+
+def load_by_token(
+    sqlite_index_file: str, json_data_file: str, token: str
+) -> Optional[Dict[str, Any]]:
+    """Return the dataset row for ``token``, or ``None`` when it is not in the index.
+
+    Retries a transient filesystem failure :data:`_IO_RETRY_ATTEMPTS` times, dropping the cached
+    handles first so the retry reconnects rather than reusing a connection the error may have left
+    unusable. Only I/O errors are retried -- a missing index, a malformed row or an absent token
+    are answers, not blips, and are raised or returned immediately.
+    """
+    key = (sqlite_index_file, json_data_file)
+    backoff = _IO_RETRY_BACKOFF_S
+    for attempt in range(_IO_RETRY_ATTEMPTS):
+        try:
+            return _read_by_token(sqlite_index_file, json_data_file, token)
+        except (sqlite3.OperationalError, OSError) as error:
+            # FileNotFoundError is an OSError, but it is a configuration mistake rather than a
+            # blip: retrying it just delays the same failure.
+            if isinstance(error, FileNotFoundError) or attempt == _IO_RETRY_ATTEMPTS - 1:
+                raise
+            _drop_cached_handles(key)
+            time.sleep(backoff)
+            backoff *= 2
+    raise AssertionError("unreachable")  # pragma: no cover
 
 
 def find_token_by_route_start(json_data_file: str, route_start: list) -> Optional[str]:
